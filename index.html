@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveTrack | Yasal Bilgilendirme Merkezi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --bg: #050a18;
+            --card-bg: rgba(16, 24, 48, 0.95);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #fbbf24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- HEADER & NAV --- */
+        nav { 
+            position: fixed; top: 0; width: 100%; padding: 20px 5%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(5, 10, 24, 0.9); backdrop-filter: blur(15px); 
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; color: var(--primary); text-decoration: none; }
+        
+        .nav-tabs { display: flex; gap: 15px; }
+        .tab-btn { 
+            background: transparent; border: 1px solid rgba(255,255,255,0.1); 
+            color: var(--text-dim); padding: 8px 18px; border-radius: 12px; 
+            cursor: pointer; transition: 0.3s; font-size: 0.9rem; font-weight: 600;
+        }
+        .tab-btn.active { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            color: #fff; border: none; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        /* --- BACKGROUND DECOR --- */
+        .glow {
+            position: fixed; width: 40vw; height: 40vw; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .container { max-width: 1000px; margin: 120px auto 60px; padding: 0 20px; }
+        
+        .content-section { display: none; animation: fadeIn 0.5s ease forwards; }
+        .content-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .legal-card { 
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 28px; padding: 50px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 30px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { color: var(--primary); margin: 30px 0 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+        p { color: var(--text-dim); margin-bottom: 15px; font-size: 1.05rem; }
+        
+        ul { list-style: none; margin-bottom: 20px; }
+        li { color: var(--text-dim); margin-bottom: 8px; padding-left: 20px; position: relative; }
+        li::before { content: '•'; position: absolute; left: 0; color: var(--primary); }
+
+        .info-box { 
+            background: rgba(255,255,255,0.02); border-radius: 15px; 
+            padding: 20px; border-left: 4px solid var(--accent); margin: 20px 0;
+        }
+
+        footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); padding: 10px; border-radius: 20px; width: 90%; justify-content: center; }
+            .legal-card { padding: 25px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow" style="top: -10%; right: -10%;"></div>
+    <div class="glow" style="bottom: -10%; left: -10%;"></div>
+
+    <nav>
+        <a href="#" class="logo">DRIVETRACK</a>
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'privacy')">Gizlilik</button>
+            <button class="tab-btn" onclick="openTab(event, 'terms')">Koşullar</button>
+            <button class="tab-btn" onclick="openTab(event, 'disclosure')">Aydınlatma</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <div id="privacy" class="content-section active">
+            <div class="legal-card">
+                <h1>Gizlilik Politikası</h1>
+                <p>Bu politika, DriveTrack uygulamasının verilerinizi nasıl işlediğini açıklar.</p>
+                
+                <h2><i class="fas fa-map-marker-alt"></i> Konum Verileri</h2>
+                <p>Uygulamamız, sürüş rotanızı takip etmek ve analiz etmek için hassas konum verilerinizi toplar. Bu veriler sürüş oturumu kapandığında anonimleştirilir.</p>
+                
+                <h2><i class="fas fa-user-shield"></i> Veri Paylaşımı</h2>
+                <p>Kişisel verileriniz asla reklam ajansları veya veri simsarları ile paylaşılmaz. Sadece yasal zorunluluk hallerinde yetkili makamlara bilgi verilir.</p>
+                
+                <div class="info-box">
+                    <strong>Not:</strong> Hesabınızı silmek isterseniz uygulama içindeki "Hesabımı Sil" butonuyla tüm verilerinizi 30 gün içinde sistemden silebilirsiniz.
+                </div>
+            </div>
+        </div>
+
+        <div id="terms" class="content-section">
+            <div class="legal-card">
+                <h1>Hizmet Koşulları</h1>
+                <p>DriveTrack platformuna erişerek aşağıdaki şartları kabul etmiş sayılırsınız:</p>
+                
+                <h2><i class="fas fa-balance-scale"></i> Kullanım Kuralları</h2>
+                <ul>
+                    <li>Uygulama sadece yasal sürüş faaliyetleri için tasarlanmıştır.</li>
+                    <li>Hız limitlerini ihlal etmenizden doğacak yasal sorumluluklar kullanıcıya aittir.</li>
+                    <li>Sistemin tersine mühendislik yoluyla kopyalanması yasaktır.</li>
+                </ul>
+                
+                <h2><i class="fas fa-exclamation-triangle"></i> Sorumluluk Reddi</h2>
+                <p>DriveTrack, sürüş sırasında dikkat dağınıklığını önlemek için sesli komutlar sunsa da, asıl sorumluluk sürücüdedir. Cihaz kullanımı sırasında trafik kurallarına uyulmalıdır.</p>
+            </div>
+        </div>
+
+        <div id="disclosure" class="content-section">
+            <div class="legal-card">
+                <h1>KVKK Aydınlatma Metni</h1>
+                <p>6698 Sayılı Kişisel Verilerin Korunması Kanunu uyarınca aydınlatma yükümlülüğümüz:</p>
+                
+                <h2><i class="fas fa-university"></i> Veri Sorumlusu</h2>
+                <p>DriveTrack veri sorumlusu sıfatıyla hareket etmektedir.</p>
+                
+                <h2><i class="fas fa-clipboard-list"></i> İşleme Amaçları</h2>
+                <ul>
+                    <li>Sözleşme süreçlerinin yürütülmesi.</li>
+                    <li>Hizmetlerin kişiselleştirilmesi.</li>
+                    <li>Hukuki süreçlerin takibi.</li>
+                </ul>
+                
+                <div class="info-box" style="border-left-color: var(--primary);">
+                    İlgili kişi olarak haklarınızı (erişim, düzeltme, silme) kullanmak için <strong>destek@drivetrack.io</strong> adresine başvuru yapabilirsiniz.
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 DriveTrack. Burak Bozoğlu Tüm Hakları Saklıdır</p>
+    </footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Tüm içerikleri gizle
+            const sections = document.getElementsByClassName("content-section");
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove("active");
+            }
+
+            // Tüm butonlardaki active sınıfını kaldır
+            const tabs = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            // Seçilen içeriği göster ve butonu aktif yap
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Sayfayı yukarı kaydır
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
